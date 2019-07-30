@@ -42,19 +42,22 @@ const styles = StyleSheet.create({
 class FireMap extends Component{
 
     constructor(props){
+        super();
+        
         this.state = {
             markers: []
         }
-        // this.update();
+        this.update();
     }
 
     update(){
         let $this = this;
         let mLens = R.lensProp('markers');
-        // NasaFirmFeed.get()
-        //     .then(R.prop('data'))
-        //     .then(R.set(R.lensProp('marker'), R.__, $this.state))
-        //     .then($this.setState);
+        NasaFirmFeed.get()
+            .then(R.prop('data'))
+            .then(R.set(R.lensProp('markers'), R.__, $this.state))
+            .then(R.tap(console.log))
+            .then(d => $this.setState(d));
     }
 
     render(){
