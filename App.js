@@ -29,7 +29,7 @@ import {
 import {createDrawerNavigator, createAppContainer} from 'react-navigation';
 import R from 'ramda';
 
-import Api from './services/Api.js';
+import FireMap from './components/FireMap.js';
 
 const styles = StyleSheet.create({
   container: {
@@ -57,26 +57,7 @@ class HomeScreen extends Component {
 
 const MapScreen = () => {
   return (
-    <View style={styles.container}>
-      <MapView
-        provider={PROVIDER_GOOGLE}
-        style={styles.map}
-        initialRegion={{
-          latitude: 37.78825,
-          longitude: -122.4324,
-          latitudeDelta: 0.015,
-          longitudeDelta: 0.0121,
-        }}
-      >
-        <Marker
-          key="chungus"
-          coordinate={{
-            latitude: 37.78825,
-            longitude: -122.4324,
-        }}
-         title="mephistopheles"/>
-         </MapView>
-    </View>
+    <FireMap />
   );
 };
 
@@ -86,11 +67,5 @@ const MainNavigator = createDrawerNavigator({
 });
                       //we'll wait on this until post-mvp
 const App = MapScreen //createAppContainer(MainNavigator);
-
-Api.patch('/2', {phenomena: 'wildfire'});
-
-Api.get()
-   .then(R.prop('data'))
-   .then(R.tap(console.log));
 
 export default App;
